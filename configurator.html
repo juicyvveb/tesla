@@ -43,28 +43,28 @@
             <aside class="detailsCar__info">
               <div class="detailsCar__aside">
                 <h1 class="detailsCar__title">
-                   Model S</h1>
+                   Model S</h1> //TODO: title
                 <p class="detailsCar__mod configCar__delivery">Доставка: январь - март 2023 г.</p>
                 <ul class="detailsCar__feature">
-                  <li> <span>396mi</span>Range (EPA est.)</li>
-                  <li> <span>200mph</span>Top speed</li>
-                  <li> <span>3.1sec</span>0-60 mph</li>
+                  <li> <span class="range">396mi</span>Range (EPA est.)</li> //TODO:
+                  <li> <span class="speed">200mph</span>Top speed</li>
+                  <li> <span class="mph">3.1sec</span>0-60 mph</li>
                 </ul>
                 <div class="prices">
                   <div class="prices__inner">
                     <div class="prices__item">
                       <div class="prices__title">
                          Двухмоторный полный привод</div>
-                      <input class="prices__input" type="radio" checked name="price" id="dual">
+                      <input class="prices__input" type="radio" checked value="model-s" name="price" id="dual">
                       <label class="prices__label" for="dual">
                         <div class="prices__type">Model S</div>
-                        <div class="prices__count">$94,990</div>
+                        <div class="prices__count">$94,990</div>//TODO: price
                       </label>
                     </div>
                     <div class="prices__item">
                       <div class="prices__title">
                          Трехмоторный полный привод</div>
-                      <input class="prices__input" type="radio" data-mi="420" data-mph="220" data-sec="1.99" name="price" id="tri">
+                      <input class="prices__input" type="radio" value="model-s-plaid" data-mi="420" data-mph="220" data-sec="1.99" name="price" id="tri">
                       <label class="prices__label" for="tri">
                         <div class="prices__type">Model S Plaid</div>
                         <div class="prices__count">$114,990</div>
@@ -81,9 +81,9 @@
                   <div class="filterCar__look paint">
                     <div class="filterCar__mobile" data-img="paint"><img src="static/images/img/models/wheels/type1/interior/black/white/2.jpg" alt="Slide"></div>
                     <div class="filterCar__title">
-                       Цвета</div>
-                    <div class="filterCar__inner">
-                      <div class="filterCar__item">
+                       Цвета</div>//TODO:colors
+                    <div class="filterCar__inner filter-colors">
+                      <!-- <div class="filterCar__item">
                         <input class="filterCar__input" type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="white" name="paint" checked id="paintWhite">
                         <label class="filterCar__label" for="paintWhite"><img src="static/images/img/filter/paint/white.png" alt="Белый цвет"></label>
                       </div>
@@ -102,31 +102,32 @@
                       <div class="filterCar__item">
                         <input class="filterCar__input" type="radio" name="paint" data-descr="Красное многослойное покрытие" id="paintRed" data-state="red">
                         <label class="filterCar__label" for="paintRed"><img src="static/images/img/filter/paint/red.png" alt="Красный цвет"></label>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="filterCar__value">Жемчужно-белое многослойное покрытие</div>
                   </div>
                   <div class="filterCar__look wheels">
                     <div class="filterCar__mobile" data-img="wheels"><img src="static/images/img/models/wheels/type1/interior/black/white/4.jpg" alt="Slide"></div>
                     <div class="filterCar__title">
-                       Диски</div>
-                    <div class="filterCar__inner">
-                      <div class="filterCar__item">
+                       Диски</div>//TODO:wheels
+                    <div class="filterCar__inner filter-wheels">
+                      <!-- <div class="filterCar__item">
                         <input class="filterCar__input" type="radio" data-descr="19-дюймовые колеса Tempest" name="wheels" data-state="tempest" checked id="wheelsTempest">
                         <label class="filterCar__label" for="wheelsTempest"><img src="static/images/img/filter/wheels/tempest.png" alt="19-дюймовые колеса Tempest"></label>
                       </div>
                       <div class="filterCar__item">
                         <input class="filterCar__input" type="radio" data-descr="21-дюймовые арахнидные колеса" name="wheels" data-state="arachnid" id="wheelsArachnid">
                         <label class="filterCar__label" for="wheelsArachnid"><img src="static/images/img/filter/wheels/arachnid.png" alt="21-дюймовые арахнидные колеса"></label>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="filterCar__value">19-дюймовые колеса Tempest</div>
                   </div>
-                  <div class="filterCar__look interior">
+                  <div class="filterCar__look interior ">
                     <div class="filterCar__mobile" data-img="interior"><img src="static/images/img/models/interior/black/white/5.jpg" alt="Slide"></div>
                     <div class="filterCar__title">Интерьер</div>
-                    <div class="filterCar__inner">
-                      <div class="filterCar__item">
+                    //TODO:interir
+                    <div class="filterCar__inner filter-interier">
+                      <!-- <div class="filterCar__item">
                         <input class="filterCar__input" type="radio" data-descr="Черный салон" name="interior" data-state="black" checked id="interiorBlack">
                         <label class="filterCar__label" for="interiorBlack"><img src="static/images/img/filter/interior/black.png" alt="Черный салон"></label>
                       </div>
@@ -137,21 +138,21 @@
                       <div class="filterCar__item">
                         <input class="filterCar__input" type="radio" data-descr="Кремовый салон" name="interior" data-state="cream" id="interiorCream">
                         <label class="filterCar__label" for="interiorCream"><img src="static/images/img/filter/interior/cream.png" alt="Кремовый салон"></label>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="filterCar__value">Черный декор</div>
                   </div>
-                  <div class="filterCar__look control">
+                  <div class="filterCar__look control ">
                     <div class="filterCar__title">Руль</div>
-                    <div class="filterCar__inner">
-                      <div class="filterCar__item">
+                    <div class="filterCar__inner filter-steering">
+                      <!-- <div class="filterCar__item">
                         <input class="filterCar__input" type="radio" data-descr="Стандартный руль" name="control" data-state="standart" checked id="controlStandart">
                         <label class="filterCar__label" for="controlStandart"><img src="static/images/img/filter/control/wheel-b.png" alt="Черный салон"></label>
                       </div>
                       <div class="filterCar__item">
                         <input class="filterCar__input" type="radio" data-descr="Прямоугольный руль" name="control" data-state="yoke" id="controlYoke">
                         <label class="filterCar__label" for="controlYoke"><img src="static/images/img/filter/control/wheel-y.png" alt="Белый салон"></label>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="filterCar__value">Стандартный руль</div>
                   </div>
@@ -235,5 +236,6 @@
     <script src="static/js/libs.min.js"></script>
     <script src="static/js/main.js"></script>
     <script src="static/js/models.js"></script>
+    <script src="static/js/filtration.js"></script>
   </body>
 </html>
