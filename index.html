@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+  <head>
+    <meta charset="utf-8">
+    <title>Главная страница</title><!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE = edge"><![endif]-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="color-theme" content="">
+    <link rel="stylesheet" type="text/css" href="static/css/styles.min.css"><!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script><![endif]-->
+  </head>
+  <body class="index-page">
+    <div class="wrapper">
+      <header class="header"><a class="header__logo logo" href="#"> <img src="static/images/img/logo.svg" alt="Tesla by Autotraider"></a></header>
+      <main class="content">
+        <div class="detailsCar">
+          <div class="detailsCar__inner"> 
+            <div class="detailsCar__slider">
+              <div class="swiper swiperDetails">
+                <div class="swiper-wrapper swiperDetails__inner">
+                  <div class="swiper-slide swiperDetails__slide"><img src="static/images/img/card/1.jpg" alt="Slide"></div>
+                  <div class="swiper-slide swiperDetails__slide"><img src="static/images/img/card/2.jpg" alt="Slide"></div>
+                </div>
+                <div class="swiperDetails__arrows">
+                  <div class="swiperDetails__arrow swiperDetails__next">
+                    <svg class="svg-sprite-icon  icon-arrow-left swiperDetails__icon">
+                      <use xlink:href="static/images/svg/symbol/sprite.svg#arrow-left"></use>
+                    </svg>
+                  </div>
+                  <div class="swiperDetails__arrow swiperDetails__prev">
+                    <svg class="svg-sprite-icon  icon-arrow-right swiperDetails__icon">
+                      <use xlink:href="static/images/svg/symbol/sprite.svg#arrow-right"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="openGallery" open-modal-gallery>
+                <div class="openGallery__btn">
+                  <svg class="svg-sprite-icon  icon-arrow-up openGallery__icon">
+                    <use xlink:href="static/images/svg/symbol/sprite.svg#arrow-up"></use>
+                  </svg>
+                </div><span>Смотреть фотографии</span>
+              </div>
+            </div>
+            <aside class="detailsCar__info">
+              <h1 class="detailsCar__title">
+                 2020 Tesla Model 3</h1>
+              <p class="detailsCar__mod">Модификация: Rear-Wheel Drive</p>
+              <ul class="detailsCar__feature">
+                <li> <span>637 км</span>Запас хода</li>
+                <li> <span>1,99 сек</span>0-100 км/ч</li>
+                <li> <span>260 км/ч</span>Макс. скорость</li>
+              </ul>
+              <div class="detailsCar__prices">
+                <div class="detailsPrice-cash">Цена за наличные:</div>
+                <div class="detailsPrice-rub">6 700 000 ₽</div>
+                <div class="detailsPrice-usd">79 500 $</div>
+                <div class="detailsPayment">
+                  <div class="detailsPayment__item"><span>Безналичный рассчет:</span>
+                    <div class="detailsPayment__rub">7 100 000 ₽</div>
+                    <div class="detailsPayment__usd">89 500 $</div>
+                  </div>
+                  <div class="detailsPayment__item"><span>Лизинг:</span>
+                    <div class="detailsPayment__rub">110 000 ₽</div>
+                    <div class="detailsPayment__usd">3 500 $ / мес</div>
+                  </div>
+                </div>
+                <button class="detailsPrice__btn" type="button">Получить расчет</button>
+              </div>
+              <div class="qualitiesCar">
+                <div class="qualitiesCar__title">Состояние авто:</div>
+                <ul class="qualitiesCar__list">
+                  <li class="qualitiesCar__item">Состояние: с пробегом</li>
+                  <li class="qualitiesCar__item">Пробег: 3000 км</li>
+                </ul>
+              </div>
+              <div class="qualitiesCar">
+                <div class="qualitiesCar__title">Преимущества:</div>
+                <ul class="qualitiesCar__list">
+                  <li class="qualitiesCar__item">Самый быстрый серийный авто в мире</li>
+                  <li class="qualitiesCar__item">Аудиосистема премиум-класса</li>
+                  <li class="qualitiesCar__item">Передние сиденья с электрорегулировкой</li>
+                  <li class="qualitiesCar__item">Обогрев всех сидений и руля</li>
+                  <li class="qualitiesCar__item">Обогрев щеток стеклоочистителей и форсунок</li>
+                  <li class="qualitiesCar__item">Система Keyless Entry</li>
+                  <li class="qualitiesCar__item">Мобильное приложение</li>
+                  <li class="qualitiesCar__item">Голосовые команды</li>
+                  <li class="qualitiesCar__item">Самозатемняющиеся зеркала</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+    <div class="modal-cars">
+      <div class="modal-cars__inner"> 
+        <div class="swiper modalCars">
+          <div class="swiper-wrapper modalCars__inner">
+            <div class="swiper-slide modalCars__slide"><img src="static/images/img/card/1.jpg" alt="">
+              <button class="modalCars__close" type="button" aria-label="close modal">
+                <svg class="svg-sprite-icon  icon-close modalCars__icon">
+                  <use xlink:href="static/images/svg/symbol/sprite.svg#close"></use>
+                </svg>
+              </button>
+            </div>
+            <div class="swiper-slide modalCars__slide"><img src="static/images/img/card/2.jpg" alt="">
+              <button class="modalCars__close" type="button" aria-label="close modal">
+                <svg class="svg-sprite-icon  icon-close modalCars__icon">
+                  <use xlink:href="static/images/svg/symbol/sprite.svg#close"></use>
+                </svg>
+              </button>
+            </div>
+            <div class="swiper-slide modalCars__slide"><img src="static/images/img/card/1.jpg" alt="">
+              <button class="modalCars__close" type="button" aria-label="close modal">
+                <svg class="svg-sprite-icon  icon-close modalCars__icon">
+                  <use xlink:href="static/images/svg/symbol/sprite.svg#close"></use>
+                </svg>
+              </button>
+            </div>
+            <div class="swiper-slide modalCars__slide"><img src="static/images/img/card/2.jpg" alt="">
+              <button class="modalCars__close" type="button" aria-label="close modal">
+                <svg class="svg-sprite-icon  icon-close modalCars__icon">
+                  <use xlink:href="static/images/svg/symbol/sprite.svg#close"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="modalCars__dots"></div>
+          <div class="modalCars__arrows">
+            <div class="modalCars__arrow modalCars__prev">
+              <svg class="svg-sprite-icon icon-arrow-left">
+                <use xlink:href="static/images/svg/symbol/sprite.svg#arrow-left"></use>
+              </svg>
+            </div>
+            <div class="modalCars__arrow modalCars__next">
+              <svg class="svg-sprite-icon icon-arrow-right">
+                <use xlink:href="static/images/svg/symbol/sprite.svg#arrow-right"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overlay"></div>
+    <script src="static/js/libs.min.js"></script>
+    <script src="static/js/main.js"></script>
+  </body>
+</html>
