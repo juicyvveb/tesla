@@ -75,7 +75,6 @@ const model_s_plaid = new ModelSPlaid(
     { size: 21, title: 'arachnid' },
   ],
   'black,white,cream',
-  'standard,rectangle',
   [
     { type: 'wheel-b', description: 'стандартный руль', id: 'controlStandart' },
     { type: 'wheel-y', description: 'прямоугольный руль', id: 'controlYoke' },
