@@ -51,11 +51,30 @@ const model_s = new ModelS(
   396,
   200,
   3.1,
-  'white,black,silver,blue,red',
-  [
-    { size: 19, title: 'Tempest' },
-    { size: 21, title: 'arachnid' },
-  ],
+  {
+    silver: {
+      description: 'Полуночный серебристый металлик',
+      alt: 'Серый цвет',
+    },
+    blue: {
+      description: 'Глубокий синий металлик',
+      alt: 'Синий цвет',
+    },
+    red: {
+      description: 'Красное многослойное покрытие',
+      alt: 'Красный цвет',
+    },
+  },
+  {
+    tempest: {
+      size: 19,
+      title: 'Tempest',
+    },
+    arachnid: {
+      size: 21,
+      title: 'Arachnid',
+    },
+  },
   'black,white,cream',
   [
     { type: 'wheel-b', description: 'стандартный руль', id: 'controlStandart' },
@@ -69,11 +88,38 @@ const model_s_plaid = new ModelSPlaid(
   416,
   250,
   1.9,
-  'white,black,silver,blue,red',
-  [
-    { size: 19, title: 'tempest' },
-    { size: 21, title: 'arachnid' },
-  ],
+  {
+    white: {
+      description: 'Жемчужно-белое многослойное покрытие',
+      alt: 'Белый цвет',
+    },
+    black: {
+      description: 'Сплошной черный',
+      alt: 'Черный цвет',
+    },
+    silver: {
+      description: 'Полуночный серебристый металлик',
+      alt: 'Серый цвет',
+    },
+    blue: {
+      description: 'Глубокий синий металлик',
+      alt: 'Синий цвет',
+    },
+    red: {
+      description: 'Красное многослойное покрытие',
+      alt: 'Красный цвет',
+    },
+  },
+  {
+    tempest: {
+      size: 19,
+      title: 'Tempest',
+    },
+    arachnid: {
+      size: 21,
+      title: 'Arachnid',
+    },
+  },
   'black,white,cream',
   [
     { type: 'wheel-b', description: 'стандартный руль', id: 'controlStandart' },
@@ -85,7 +131,7 @@ const model_s_plaid = new ModelSPlaid(
 //варианты моделей для страницы ModelS
 const variants = { 'model-s': model_s, 'model-s-plaid': model_s_plaid };
 let currentVariant = model_s; //по дефолту грузим modelS
-
+let C = currentVariant;
 const inputsWithCurrent = document.querySelectorAll('.prices__input');
 
 // console.log(inputWithCurrent.value)
@@ -95,6 +141,41 @@ const inputsWithCurrent = document.querySelectorAll('.prices__input');
     pasteData();
   });
 });
+
+// const colorFilter = {
+//   white: {
+//     description: 'Жемчужно-белое многослойное покрытие',
+//     alt: 'Белый цвет',
+//   },
+//   black: {
+//     description: 'Сплошной черный',
+//     alt: 'Черный цвет',
+//   },
+//   silver: {
+//     description: 'Полуночный серебристый металлик',
+//     alt: 'Серый цвет',
+//   },
+//   blue: {
+//     description: 'Глубокий синий металлик',
+//     alt: 'Синий цвет',
+//   },
+//   red: {
+//     description: 'Красное многослойное покрытие',
+//     alt: 'Красный цвет',
+//   },
+// };
+
+const wheelsFilter = {
+  tempest: {
+    size: 19,
+    title: 'Tempest',
+  },
+  arachnid: {
+    size: 21,
+    title: 'Arachnid',
+  },
+};
+
 //gettingdynamic inform slots
 const title = document.querySelector('.detailsCar__title'),
   features = document.querySelector('.detailsCar__feature'),
@@ -125,37 +206,42 @@ function pasteData() {
   speed.innerText = `${C.speed}mph`;
   mph.innerText = `${C.mph}sec`;
   // price.innerText = `$${C.price}`
-  buildColorFilter();
-  buildWheelsFilter();
-  buildInterier();
-  C.sterring ? buildSteering() : null;
+  buildColorFilterBlock();
+  buildWheelsFilterBlock();
+  buildInterierBlock();
+  C.sterring ? buildSteeringBlock() : null;
 }
 
-function buildColorFilter() {
+function buildColorFilterBlock() {
   colors.innerHTML = '';
-  currentVariant.colors.split(',').forEach((color) => {
+  //   const availableColors = Object.keys(colorFilter).filter(color => currentVariant.colors.split(',').includes(color))
+  const availableColors = Object.keys(currentVariant.colors);
+  //   console.log(availableColors.white)
+  availableColors.forEach((color) => {
+    console.log(color);
     const colorItem = document.createElement('div');
     colorItem.classList.add('filterCar__item');
-    colorItem.innerHTML = `<input class="filterCar__input" type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="${color}" name="paint" checked id="paint${color}">
-    <label class="filterCar__label" for="paint${color}"><img src="static/images/img/filter/paint/${color}.png" alt="${color}"></label>`;
+    colorItem.innerHTML = `<input class="filterCar__input" type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="${color}" name="paint" id="paint${color}">
+    <label class="filterCar__label" for="paint${color}"><img src="static/images/img/filter/paint/${color}.png" alt="${currentVariant.colors[color].alt}"></label>`;
     colors.appendChild(colorItem);
   });
 }
 
-function buildWheelsFilter() {
+function buildWheelsFilterBlock() {
   wheels.innerHTML = '';
-  currentVariant.wheels.forEach(({ size, title }) => {
+  const availableWheels = Object.keys(currentVariant.wheels);
+  availableWheels.forEach((type) => {
     const wheelItem = document.createElement('div');
     wheelItem.classList.add('filterCar__item');
     wheelItem.innerHTML = `
-        <input class="filterCar__input" type="radio" data-descr="${size}-дюймовые колеса ${title}" name="wheels" data-state="tempest" checked id="wheels${title}">
-        <label class="filterCar__label" for="wheels${title}"><img src="static/images/img/filter/wheels/${title}.png" alt="${size}-дюймовые колеса ${title}"></label>
+        <input class="filterCar__input" type="radio" data-descr="${C.wheels[type].size}-дюймовые колеса ${C.wheels[type].title}" name="wheels" data-state="tempest" id="wheels${C.wheels[type].title}">
+        <label class="filterCar__label" for="wheels${C.wheels[type].title}"><img src="static/images/img/filter/wheels/${type}.png" alt="${C.wheels[type].size}-дюймовые колеса ${title}"></label>
         `;
     wheels.appendChild(wheelItem);
   });
 }
 
-function buildInterier() {
+function buildInterierBlock() {
   interier.innerHTML = '';
   currentVariant.interior.split(',').forEach((style) => {
     const interierItem = document.createElement('div');
@@ -168,15 +254,17 @@ function buildInterier() {
   });
 }
 
-function buildSteering() {
+function buildSteeringBlock() {
   steering.innerHTML = '';
   currentVariant.sterring.forEach(({ type, description, id }) => {
     const sterringType = document.createElement('div');
     sterringType.classList.add('filterCar__item');
     sterringType.innerHTML = `
-    <input class="filterCar__input" type="radio" data-descr="${description}" name="control" data-state="${type}" checked id="${id}">
+    <input class="filterCar__input" type="radio" data-descr="${description}" name="control" data-state="${type}" id="${id}">
     <label class="filterCar__label" for="${id}"><img src="static/images/img/filter/control/${type}.png" alt="Черный салон"></label>
     `;
     steering.appendChild(sterringType);
   });
 }
+
+//установка дефолтных фильтров
