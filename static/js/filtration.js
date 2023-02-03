@@ -393,7 +393,7 @@ function buildSwiper() {
     pasteSrcToImg(0, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/1.jpg`)
     pasteSrcToImg(1, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg`)
     pasteSrcToImg(2, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/3.jpg`)
-    pasteSrcToImg(3, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/4.jpg`)
+    pasteSrcToImg(3, `static/images/img/models/handlebar/${choosedSteering}/interior/${choosedInterier}/${choosedColor}/1.jpg`)
     pasteSrcToImg(4, `static/images/img/models/interior/${choosedInterier}/${choosedColor}/5.jpg`)
 
     return 
@@ -410,6 +410,6 @@ function buildSwiper() {
   swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/1.jpg`))
   swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg`))
   swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/3.jpg`))
-  swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/4.jpg`))
+  swiper.appendChild(buildSlide(`static/images/img/models/handlebar/${choosedSteering}/interior/${choosedInterier}/${choosedColor}/1.jpg`))
   swiper.appendChild(buildSlide(`static/images/img/models/interior/${choosedInterier}/${choosedColor}/5.jpg`))
 }
