@@ -1,51 +1,81 @@
 class Tesla {
-  constructor(price, range, speed, mph, colors, wheels, interior, imgType) {
+  constructor(price, range, speed, mph, colors, wheels, interior) {
     this.price = price;
     this.range = range;
     this.speed = speed;
     this.mph = mph;
-    this.colors = colors;
-    this.wheels = wheels;
-    this.interior = interior;
-    this.imgType = imgType
+    this.colors = {
+      black: {
+        id: 'interiorBlack',
+        description: 'Черный салон',
+      },
+      white: {
+        id: 'interiorWhite',
+        description: 'Белый салон',
+      },
+      silver: {
+        description: 'Полуночный серебристый металлик',
+        alt: 'Серый цвет',
+      },
+      blue: {
+        description: 'Глубокий синий металлик',
+        alt: 'Синий цвет',
+      },
+      red: {
+        description: 'Красное многослойное покрытие',
+        alt: 'Красный цвет',
+      }
+    }
+    this.wheels = {
+      tempest: {
+        size: 19,
+        title: 'Tempest',
+        imgFolder: 'type1'
+      },
+      arachnid: {
+        size: 21,
+        title: 'Arachnid',
+        imgFolder: 'type2'
+      },
+    }
+    this.interior = {
+      black: {
+        id: 'interiorBlack',
+        description: 'Черный салон',
+      },
+      white: {
+        id: 'interiorWhite',
+        description: 'Белый салон',
+      },
+      cream: {
+        id: 'interiorCream',
+        description: 'Кремовый салон',
+      }
+    }
   }
-  static getPrice() {
+  getPrice() {
     return this.price;
   }
 }
 
 class ModelS extends Tesla {
-  constructor(
-    price,
-    range,
-    speed,
-    mph,
-    colors,
-    wheels,
-    interior,
-    sterring,
-    title,
-    imgType //type for images folder(type1/type2)
-  ) {
-    super(price, range, speed, mph, colors, wheels, interior, imgType);
-    this.sterring = sterring;
-    this.title = title;
-  }
-}
-class ModelSPlaid extends ModelS {
-  constructor(
-    price,
-    range,
-    speed,
-    mph,
-    colors,
-    wheels,
-    interior,
-    sterring,
-    title,
-    imgType //type for images folder(type1/type2)
-  ) {
-    super(price, range, speed, mph, colors, wheels, interior, sterring, title, imgType);
+  constructor(...args) {
+    super(...args)
+    this.sterring = {
+      standart: {
+        description: 'Стандартный руль',
+        id: "controlStandart",
+        type: 'wheel-b',
+        imgFolder: 'type1'
+      },
+      yoke: {
+        description: 'Прямоугольный руль',
+        id: "controlYoke",
+        type: 'wheel-y',
+        imgFolder: 'type2'
+      },
+
+    }
   }
 }
 
@@ -53,136 +83,17 @@ const model_s = new ModelS(
   94900,
   396,
   200,
-  3.1, {
-    // black: {
-    //   id: 'interiorBlack',
-    //   description: 'Черный салон',
-    // },
-    // white: {
-    //   id: 'interiorWhite',
-    //   description: 'Белый салон',
-    // },
-    silver: {
-      description: 'Полуночный серебристый металлик',
-      alt: 'Серый цвет',
-    },
-    blue: {
-      description: 'Глубокий синий металлик',
-      alt: 'Синий цвет',
-    },
-    red: {
-      description: 'Красное многослойное покрытие',
-      alt: 'Красный цвет',
-    },
-  }, {
-    tempest: {
-      size: 19,
-      title: 'Tempest',
-      imgFolder: 'type1'
-    },
-    arachnid: {
-      size: 21,
-      title: 'Arachnid',
-      imgFolder: 'type2'
-    },
-  }, {
-    black: {
-      id: 'interiorBlack',
-      description: 'Черный салон',
-    },
-    white: {
-      id: 'interiorWhite',
-      description: 'Белый салон',
-    },
-    cream: {
-      id: 'interiorCream',
-      description: 'Кремовый салон',
-    }
-  }, {
-    standart: {
-      type: 'wheel-b',
-      description: "Стандартный руль",
-      id: "controlStandart",
-      imgFolder: 'type1'
-    },
-    yoke: {
-      type: 'wheel-y',
-      description: "Прямоугольный руль",
-      id: "controlYoke",
-      imgFolder: 'type2'
-    }
-  },
+  3.1,
   'Model S',
-  'type1'
 );
-
-const model_s_plaid = new ModelSPlaid(
-  114900,
-  416,
-  250,
-  1.9, {
-    white: {
-      description: 'Жемчужно-белое многослойное покрытие',
-      alt: 'Белый цвет',
-    },
-    black: {
-      description: 'Сплошной черный',
-      alt: 'Черный цвет',
-    },
-    silver: {
-      description: 'Полуночный серебристый металлик',
-      alt: 'Серый цвет',
-    },
-    blue: {
-      description: 'Глубокий синий металлик',
-      alt: 'Синий цвет',
-    },
-    red: {
-      description: 'Красное многослойное покрытие',
-      alt: 'Красный цвет',
-    },
-  }, {
-    tempest: {
-      size: 19,
-      title: 'Tempest',
-      imgFolder: 'type1'
-    },
-    arachnid: {
-      size: 21,
-      title: 'Arachnid',
-      imgFolder: 'type2'
-    },
-  }, {
-    black: {
-      id: 'interiorBlack',
-      description: 'Черный салон',
-    },
-    white: {
-      id: 'interiorWhite',
-      description: 'Белый салон',
-    },
-    cream: {
-      id: 'interiorCream',
-      description: 'Кремовый салон',
-    }
-  }, {
-    standart: {
-      type: 'wheel-b',
-      description: "Стандартный руль",
-      id: "controlStandart",
-      imgFolder: 'type1'
-    },
-    yoke: {
-      type: 'wheel-y',
-      description: "Прямоугольный руль",
-      id: "controlYoke",
-      imgFolder: 'type2'
-    }
-  },
-  'Model S Plaid',
-  'type2'
+const model_s_plaid = new ModelS(
+  140444,
+  400,
+  220,
+  3.5,
+  'Model S plaid',
 );
-
+console.log(model_s)
 //варианты моделей для страницы ModelS
 const variants = {
   'model-s': model_s,
@@ -197,7 +108,6 @@ let choosedWheel
 let choosedColor
 
 const inputsWithCurrent = document.querySelectorAll('.prices__input');
-// console.log(inputWithCurrent.value)
 [...inputsWithCurrent].forEach((input) => {
   input.addEventListener('input', (e) => {
     currentVariant = variants[e.target.value];
@@ -262,6 +172,7 @@ function buildColorFilterBlock() {
 
 function buildWheelsFilterBlock() {
   if (wheels.querySelector('.filterCar__item')) return;
+
   const availableWheels = Object.keys(currentVariant.wheels);
   availableWheels.forEach((type, i) => {
     const wheelItem = document.createElement('div');
@@ -277,6 +188,7 @@ function buildWheelsFilterBlock() {
 function buildInterierBlock() {
   if (interier.querySelector('.filterCar__item')) return;
   const availableInteriers = Object.keys(C.interior);
+
   availableInteriers.forEach((type, i) => {
     const interierItem = document.createElement('div');
     interierItem.classList.add('filterCar__item');
@@ -291,6 +203,7 @@ function buildInterierBlock() {
 function buildSteeringBlock() {
   if (steering.querySelector('.filterCar__item')) return;
   const availableSterring = Object.keys(C.sterring);
+  console.log(availableSterring)
   availableSterring.forEach((type, i) => {
     const sterringType = document.createElement('div');
     sterringType.classList.add('filterCar__item');
@@ -384,21 +297,22 @@ function listenToChange() {
 
 function buildSwiper() {
   const swiper = document.querySelector('.swiper-wrapper.swiperConfig__inner');
-  if(swiper.querySelector('.swiper-slide')) {
+  if (swiper.querySelector('.swiper-slide')) {
     const slides = [...swiper.querySelectorAll('.swiper-slide')]
+
     function pasteSrcToImg(slideIndex, imageAddress) {
       slides[slideIndex].querySelector('img').setAttribute('src', imageAddress);
     }
-  
+
     pasteSrcToImg(0, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/1.jpg`)
     pasteSrcToImg(1, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg`)
     pasteSrcToImg(2, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/3.jpg`)
     pasteSrcToImg(3, `static/images/img/models/handlebar/${choosedSteering}/interior/${choosedInterier}/${choosedColor}/1.jpg`)
     pasteSrcToImg(4, `static/images/img/models/interior/${choosedInterier}/${choosedColor}/5.jpg`)
 
-    return 
+    return
   }
- 
+
   function buildSlide(imageAddress) {
     const slide = document.createElement('div');
     slide.classList.add('swiper-slide')
