@@ -249,24 +249,19 @@ function pasteData() {
 }
 
 function buildColorFilterBlock() {
-  console.log(colors.hasChildNodes())
-  // if (colors.innerHTML.length) return;
-  // else {
-    const availableColors = Object.keys(currentVariant.colors);
-    //   console.log(availableColors.white)
-    availableColors.forEach((color, i) => {
-      const colorItem = document.createElement('div');
-      colorItem.classList.add('filterCar__item');
-      colorItem.innerHTML = `<input class="filterCar__input color" value="${color}" checked=${i === 0} type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="${color}" name="paint" id="paint${color}">
+  if (colors.querySelector('.filterCar__item')) return;
+  const availableColors = Object.keys(currentVariant.colors);
+  availableColors.forEach((color, i) => {
+    const colorItem = document.createElement('div');
+    colorItem.classList.add('filterCar__item');
+    colorItem.innerHTML = `<input class="filterCar__input color" value="${color}" checked=${i === 0} type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="${color}" name="paint" id="paint${color}">
       <label class="filterCar__label" for="paint${color}"><img src="static/images/img/filter/paint/${color}.png" alt="${currentVariant.colors[color].alt}"></label>`;
-      colors.appendChild(colorItem);
-    });
-  // }
-  //   const availableColors = Object.keys(colorFilter).filter(color => currentVariant.colors.split(',').includes(color))
+    colors.appendChild(colorItem);
+  });
 }
 
 function buildWheelsFilterBlock() {
-  wheels.innerHTML = '';
+  if (wheels.querySelector('.filterCar__item')) return;
   const availableWheels = Object.keys(currentVariant.wheels);
   availableWheels.forEach((type, i) => {
     const wheelItem = document.createElement('div');
@@ -280,7 +275,7 @@ function buildWheelsFilterBlock() {
 }
 
 function buildInterierBlock() {
-  interier.innerHTML = '';
+  if (interier.querySelector('.filterCar__item')) return;
   const availableInteriers = Object.keys(C.interior);
   availableInteriers.forEach((type, i) => {
     const interierItem = document.createElement('div');
@@ -294,7 +289,7 @@ function buildInterierBlock() {
 }
 
 function buildSteeringBlock() {
-  steering.innerHTML = '';
+  if (steering.querySelector('.filterCar__item')) return;
   const availableSterring = Object.keys(C.sterring);
   availableSterring.forEach((type, i) => {
     const sterringType = document.createElement('div');
@@ -350,7 +345,6 @@ function fillSteeringImage() {
 
 
 function fillAllSlides() {
-  console.log('fill all')
   choosedSteering = getFilterCategorieValue('.filterCar__input.steering')
   choosedInterier = getFilterCategorieValue('.filterCar__input.interier')
   choosedWheel = getFilterCategorieValue('.filterCar__input.wheels')
@@ -360,6 +354,8 @@ function fillAllSlides() {
   fillWheelsImage()
   fillInterierImage()
   fillSteeringImage()
+
+  console.log(choosedColor, choosedInterier, choosedSteering, choosedWheel)
 }
 
 
@@ -387,10 +383,22 @@ function listenToChange() {
 
 
 function buildSwiper() {
-  console.log('swiper')
   const swiper = document.querySelector('.swiper-wrapper.swiperConfig__inner');
-  swiper.innerHTML = '';
+  if(swiper.querySelector('.swiper-slide')) {
+    const slides = [...swiper.querySelectorAll('.swiper-slide')]
+    function pasteSrcToImg(slideIndex, imageAddress) {
+      slides[slideIndex].querySelector('img').setAttribute('src', imageAddress);
+    }
+  
+    pasteSrcToImg(0, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/1.jpg`)
+    pasteSrcToImg(1, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg`)
+    pasteSrcToImg(2, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/3.jpg`)
+    pasteSrcToImg(3, `static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/4.jpg`)
+    pasteSrcToImg(4, `static/images/img/models/interior/${choosedInterier}/${choosedColor}/5.jpg`)
 
+    return 
+  }
+ 
   function buildSlide(imageAddress) {
     const slide = document.createElement('div');
     slide.classList.add('swiper-slide')
@@ -405,6 +413,3 @@ function buildSwiper() {
   swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/4.jpg`))
   swiper.appendChild(buildSlide(`static/images/img/models/interior/${choosedInterier}/${choosedColor}/5.jpg`))
 }
-
-
-// buildSwiper()
