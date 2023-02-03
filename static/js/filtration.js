@@ -1,9 +1,10 @@
 class Tesla {
-  constructor(price, range, speed, mph, colors, wheels, interior) {
+  constructor(price, range, speed, mph, title) {
     this.price = price;
     this.range = range;
     this.speed = speed;
     this.mph = mph;
+    this.title = title
     this.colors = {
       black: {
         id: 'interiorBlack',
@@ -78,37 +79,45 @@ class ModelS extends Tesla {
     }
   }
 }
+class ModelSPlide extends Tesla {
+  constructor(...args) {
+    super(...args)
+    this.steering = null
+  }
+}
 
-const model_s = new ModelS(
+const MODAL_S = new ModelS(
   94900,
   396,
   200,
   3.1,
   'Model S',
 );
-const model_s_plaid = new ModelS(
-  140444,
+
+const MODAL_S_PLAID = new ModelSPlide(
+  114990,
   400,
   220,
   3.5,
-  'Model S plaid',
+  'Model S Plaid',
 );
-console.log(model_s)
+
+
 //варианты моделей для страницы ModelS
 const variants = {
-  'model-s': model_s,
-  'model-s-plaid': model_s_plaid
+  'model-s': MODAL_S,
+  'model-s-plaid': MODAL_S_PLAID
 };
 
-let currentVariant = model_s; //по дефолту грузим modelS
+let currentVariant = MODAL_S; //по дефолту грузим modelS
 let C = currentVariant;
 let choosedSteering
 let choosedInterier
 let choosedWheel
 let choosedColor
 
-const inputsWithCurrent = document.querySelectorAll('.prices__input');
-[...inputsWithCurrent].forEach((input) => {
+const inputsWithModel = document.querySelectorAll('.prices__input');
+[...inputsWithModel].forEach((input) => {
   input.addEventListener('input', (e) => {
     currentVariant = variants[e.target.value];
     pasteData();
@@ -125,7 +134,6 @@ const title = document.querySelector('.detailsCar__title'),
   range = features.querySelector('.range'),
   speed = features.querySelector('.speed'),
   mph = features.querySelector('.mph'),
-  //   price = document.querySelector('.prices__count'),
   wheels = document.querySelector('.filter-wheels'),
   colors = document.querySelector('.filter-colors'),
   interier = document.querySelector('.filter-interier'),
@@ -133,7 +141,7 @@ const title = document.querySelector('.detailsCar__title'),
 
 //смотрим установлено ли какое-то значение по умолчанию в html
 (function detectDefault() {
-  [...inputsWithCurrent].filter((input) => {
+  [...inputsWithModel].filter((input) => {
     if (input.checked && variants[input.value]) {
       currentVariant = variants[input.value];
     }
@@ -151,7 +159,6 @@ function pasteData() {
   range.innerText = `${C.range}mi`;
   speed.innerText = `${C.speed}mph`;
   mph.innerText = `${C.mph}sec`;
-  // price.innerText = `$${C.price}`
   buildColorFilterBlock();
   buildWheelsFilterBlock();
   buildInterierBlock();
@@ -164,7 +171,7 @@ function buildColorFilterBlock() {
   availableColors.forEach((color, i) => {
     const colorItem = document.createElement('div');
     colorItem.classList.add('filterCar__item');
-    colorItem.innerHTML = `<input class="filterCar__input color" value="${color}" checked=${i === 0} type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="${color}" name="paint" id="paint${color}">
+    colorItem.innerHTML = `<input class="filterCar__input color" value="${color}" ${i === 0 ? 'checked' : null} type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="${color}" name="paint" id="paint${color}">
       <label class="filterCar__label" for="paint${color}"><img src="static/images/img/filter/paint/${color}.png" alt="${currentVariant.colors[color].alt}"></label>`;
     colors.appendChild(colorItem);
   });
@@ -178,7 +185,7 @@ function buildWheelsFilterBlock() {
     const wheelItem = document.createElement('div');
     wheelItem.classList.add('filterCar__item');
     wheelItem.innerHTML = `
-        <input class="filterCar__input wheels" value="${C.wheels[type].imgFolder}" checked=${i === 0} type="radio" data-descr="${C.wheels[type].size}-дюймовые колеса ${C.wheels[type].title}" name="wheels" data-state="tempest" id="wheels${C.wheels[type].title}">
+        <input class="filterCar__input wheels" value="${C.wheels[type].imgFolder}" ${i === 0 ? 'checked' : null} type="radio" data-descr="${C.wheels[type].size}-дюймовые колеса ${C.wheels[type].title}" name="wheels" data-state="tempest" id="wheels${C.wheels[type].title}">
         <label class="filterCar__label" for="wheels${C.wheels[type].title}"><img src="static/images/img/filter/wheels/${type}.png" alt="${C.wheels[type].size}-дюймовые колеса ${title}"></label>
         `;
     wheels.appendChild(wheelItem);
@@ -193,7 +200,7 @@ function buildInterierBlock() {
     const interierItem = document.createElement('div');
     interierItem.classList.add('filterCar__item');
     interierItem.innerHTML = `
-    <input class="filterCar__input interier" value="${type}" checked=${i === 0} type="radio" data-descr="${C.interior[type].description}" name="interior" data-state="${type}" id="${C.interior[type].id}">
+    <input class="filterCar__input interier" value="${type}" ${i === 0 ? 'checked' : null} type="radio" data-descr="${C.interior[type].description}" name="interior" data-state="${type}" id="${C.interior[type].id}">
     <label class="filterCar__label" for="${C.interior[type].id}"><img src="static/images/img/filter/interior/${type}.png" alt="${C.interior[type].description}}"></label>
     `;
     interier.appendChild(interierItem);
@@ -203,12 +210,11 @@ function buildInterierBlock() {
 function buildSteeringBlock() {
   if (steering.querySelector('.filterCar__item')) return;
   const availableSterring = Object.keys(C.sterring);
-  console.log(availableSterring)
   availableSterring.forEach((type, i) => {
     const sterringType = document.createElement('div');
     sterringType.classList.add('filterCar__item');
     sterringType.innerHTML = `
-    <input class="filterCar__input steering" value="${C.sterring[type].imgFolder}" checked=${i === 0} type="radio" data-descr="${C.sterring[type].description}" name="control" data-state="${type}" id="${C.sterring[type].id}">
+    <input class="filterCar__input steering" value="${C.sterring[type].imgFolder}" ${i === 0 ? 'checked' : null} type="radio" data-descr="${C.sterring[type].description}" name="control" data-state="${type}" id="${C.sterring[type].id}">
     <label class="filterCar__label" for="${C.sterring[type].id}"><img src="static/images/img/filter/control/${C.sterring[type].type}.png" alt="${C.sterring[type].description}"></label>
     `;
     steering.appendChild(sterringType);
@@ -222,6 +228,7 @@ function getFilterCategorieValue(selector) {
   let choosedValue = [...nodes].filter(input => input.checked)[0].value;
   [...nodes].forEach(input => {
     input.addEventListener('input', (e) => {
+      if(!input.checked)return
       choosedValue = input.value;
     })
   })
@@ -267,8 +274,6 @@ function fillAllSlides() {
   fillWheelsImage()
   fillInterierImage()
   fillSteeringImage()
-
-  console.log(choosedColor, choosedInterier, choosedSteering, choosedWheel)
 }
 
 
@@ -277,7 +282,7 @@ function listenToChange() {
   [...allInputsFilter].forEach(input => {
     const typeOfInput = input.getAttribute('name');
     input.addEventListener('input', () => {
-      console.log('change')
+      if(!input.checked)return
       switch (typeOfInput) {
         case 'control':
           choosedSteering = input.value;

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sliderImages = (event, url, type)=>  {
     sliderItems.forEach((slide, index) => {
       let sliderImg = slide.querySelector('img');
-      sliderImg.src = `${url}${type}/${index + 1}.jpg`;
+      // sliderImg.src = `${url}${type}/${index + 1}.jpg`;
     });
     // imgMobile(`${url}${type}/2.jpg`, `${url}${type}/4.jpg`, `${url}${type}/5.jpg`);
   }
