@@ -54,6 +54,14 @@ const model_s = new ModelS(
   396,
   200,
   3.1, {
+    // black: {
+    //   id: 'interiorBlack',
+    //   description: 'Черный салон',
+    // },
+    // white: {
+    //   id: 'interiorWhite',
+    //   description: 'Белый салон',
+    // },
     silver: {
       description: 'Полуночный серебристый металлик',
       alt: 'Серый цвет',
@@ -183,6 +191,11 @@ const variants = {
 
 let currentVariant = model_s; //по дефолту грузим modelS
 let C = currentVariant;
+let choosedSteering
+let choosedInterier
+let choosedWheel
+let choosedColor
+
 const inputsWithCurrent = document.querySelectorAll('.prices__input');
 // console.log(inputWithCurrent.value)
 [...inputsWithCurrent].forEach((input) => {
@@ -190,6 +203,8 @@ const inputsWithCurrent = document.querySelectorAll('.prices__input');
     currentVariant = variants[e.target.value];
     pasteData();
     fillAllSlides()
+    buildSwiper()
+    listenToChange()
   });
 });
 
@@ -214,6 +229,8 @@ const title = document.querySelector('.detailsCar__title'),
     }
     pasteData();
     fillAllSlides()
+    buildSwiper()
+    listenToChange()
   });
 })();
 
@@ -232,17 +249,20 @@ function pasteData() {
 }
 
 function buildColorFilterBlock() {
-  colors.innerHTML = '';
+  console.log(colors.hasChildNodes())
+  // if (colors.innerHTML.length) return;
+  // else {
+    const availableColors = Object.keys(currentVariant.colors);
+    //   console.log(availableColors.white)
+    availableColors.forEach((color, i) => {
+      const colorItem = document.createElement('div');
+      colorItem.classList.add('filterCar__item');
+      colorItem.innerHTML = `<input class="filterCar__input color" value="${color}" checked=${i === 0} type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="${color}" name="paint" id="paint${color}">
+      <label class="filterCar__label" for="paint${color}"><img src="static/images/img/filter/paint/${color}.png" alt="${currentVariant.colors[color].alt}"></label>`;
+      colors.appendChild(colorItem);
+    });
+  // }
   //   const availableColors = Object.keys(colorFilter).filter(color => currentVariant.colors.split(',').includes(color))
-  const availableColors = Object.keys(currentVariant.colors);
-  //   console.log(availableColors.white)
-  availableColors.forEach((color, i) => {
-    const colorItem = document.createElement('div');
-    colorItem.classList.add('filterCar__item');
-    colorItem.innerHTML = `<input class="filterCar__input color" value="${color}" checked=${i === 0} type="radio" data-descr="Жемчужно-белое многослойное покрытие" data-state="${color}" name="paint" id="paint${color}">
-    <label class="filterCar__label" for="paint${color}"><img src="static/images/img/filter/paint/${color}.png" alt="${currentVariant.colors[color].alt}"></label>`;
-    colors.appendChild(colorItem);
-  });
 }
 
 function buildWheelsFilterBlock() {
@@ -300,42 +320,91 @@ function getFilterCategorieValue(selector) {
   return choosedValue
 }
 
+function fillColorImage() {
+  const block = document.querySelector('.filterCar__look.paint');
+  block.querySelector('img').src = `
+    static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg
+    `
+}
+
+function fillWheelsImage() {
+  const block = document.querySelector('.filterCar__look.wheels');
+  block.querySelector('img').src = `
+    static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg
+    `
+}
+
+function fillInterierImage() {
+  const block = document.querySelector('.filterCar__look.interior');
+  block.querySelector('img').src = `
+    static/images/img/models/interior/${choosedInterier}/${choosedColor}/5.jpg
+    `
+}
+
+function fillSteeringImage() {
+  const block = document.querySelector('.filterCar__look.control');
+  block.querySelector('img').src = `
+    static/images/img/models/handlebar/${choosedSteering}/interior/${choosedInterier}/${choosedColor}/1.jpg
+    `
+}
+
+
 function fillAllSlides() {
-  let choosedSteering = getFilterCategorieValue('.filterCar__input.steering')
-  let choosedInterier = getFilterCategorieValue('.filterCar__input.interier')
-  let choosedWheel = getFilterCategorieValue('.filterCar__input.wheels')
-  let choosedColor = getFilterCategorieValue('.filterCar__input.color')
-
-  function fillColorImage() {
-    const block = document.querySelector('.filterCar__look.paint');
-    block.querySelector('img').src = `
-      static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg
-      `
-  }
-
-  function fillWheelsImage() {
-    const block = document.querySelector('.filterCar__look.wheels');
-    block.querySelector('img').src = `
-      static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg
-      `
-  }
-
-  function fillInterierImage() {
-    const block = document.querySelector('.filterCar__look.interior');
-    block.querySelector('img').src = `
-      static/images/img/models/interior/${choosedInterier}/${choosedColor}/5.jpg
-      `
-  }
-
-  function fillSteeringImage() {
-    const block = document.querySelector('.filterCar__look.control');
-    block.querySelector('img').src = `
-      static/images/img/models/handlebar/${choosedSteering}/interior/${choosedInterier}/${choosedColor}/1.jpg
-      `
-  }
+  console.log('fill all')
+  choosedSteering = getFilterCategorieValue('.filterCar__input.steering')
+  choosedInterier = getFilterCategorieValue('.filterCar__input.interier')
+  choosedWheel = getFilterCategorieValue('.filterCar__input.wheels')
+  choosedColor = getFilterCategorieValue('.filterCar__input.color')
 
   fillColorImage()
   fillWheelsImage()
   fillInterierImage()
   fillSteeringImage()
 }
+
+
+function listenToChange() {
+  const allInputsFilter = document.querySelectorAll('.filterCar__input');
+  [...allInputsFilter].forEach(input => {
+    const typeOfInput = input.getAttribute('name');
+    input.addEventListener('input', () => {
+      console.log('change')
+      switch (typeOfInput) {
+        case 'control':
+          choosedSteering = input.value;
+        case 'interior':
+          choosedInterier = input.value;
+        case 'paint':
+          choosedColor = input.value;
+        case 'wheels':
+          choosedWheel = input.value;
+      }
+      fillAllSlides()
+      buildSwiper()
+    })
+  })
+}
+
+
+function buildSwiper() {
+  console.log('swiper')
+  const swiper = document.querySelector('.swiper-wrapper.swiperConfig__inner');
+  swiper.innerHTML = '';
+
+  function buildSlide(imageAddress) {
+    const slide = document.createElement('div');
+    slide.classList.add('swiper-slide')
+    slide.classList.add('swiperDetails__slide')
+    slide.innerHTML = `<img
+    src="${imageAddress}" alt="Slide">`
+    return slide
+  }
+  swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/1.jpg`))
+  swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/2.jpg`))
+  swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/3.jpg`))
+  swiper.appendChild(buildSlide(`static/images/img/models/wheels/${choosedWheel}/interior/${choosedInterier}/${choosedColor}/4.jpg`))
+  swiper.appendChild(buildSlide(`static/images/img/models/interior/${choosedInterier}/${choosedColor}/5.jpg`))
+}
+
+
+// buildSwiper()

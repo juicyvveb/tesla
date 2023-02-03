@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let sliderImg = slide.querySelector('img');
       sliderImg.src = `${url}${type}/${index + 1}.jpg`;
     });
-    imgMobile(`${url}${type}/2.jpg`, `${url}${type}/4.jpg`, `${url}${type}/5.jpg`);
+    // imgMobile(`${url}${type}/2.jpg`, `${url}${type}/4.jpg`, `${url}${type}/5.jpg`);
   }
   const imgMobile = (url1, url2, url3)=>  {
     filterImgMobile.forEach((item) => {
